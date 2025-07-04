@@ -3,9 +3,9 @@ erDiagram
     User {
         int id PK
         string email
-        string name
-        datetime created_at
-        datetime updated_at
+        string encrypted_password
+        timestamp created_at
+        timestamp updated_at
     }
     
     List {
@@ -14,8 +14,8 @@ erDiagram
         string title
         text description
         boolean public
-        datetime created_at
-        datetime updated_at
+        timestamp created_at
+        timestamp updated_at
     }
     
     Bookmark {
@@ -23,9 +23,10 @@ erDiagram
         int user_id FK
         string document_id
         string document_type
-        text title
-        datetime created_at
-        datetime updated_at
+        string title
+        text notes
+        timestamp created_at
+        timestamp updated_at
     }
     
     ListBookmark {
@@ -33,27 +34,23 @@ erDiagram
         int list_id FK
         int bookmark_id FK
         int position
-        datetime created_at
-        datetime updated_at
+        timestamp created_at
+        timestamp updated_at
     }
     
     SolrDocument {
         string id PK
-        text title
-        text author
-        text subject
-        text format
-        datetime published_date
+        string title
         text description
+        string format
+        string author
+        string subject
+        timestamp indexed_at
     }
     
     User ||--o{ List : "owns"
     User ||--o{ Bookmark : "creates"
     List ||--o{ ListBookmark : "contains"
-    Bookmark ||--o{ ListBookmark : "belongs_to"
+    Bookmark ||--o{ ListBookmark : "appears_in"
     Bookmark }o--|| SolrDocument : "references"
-    
-    %% Additional relationships
-    List }o--|| User : "belongs_to"
-    Bookmark }o--|| User : "belongs_to"
 ```
