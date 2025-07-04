@@ -24,7 +24,6 @@ erDiagram
         string document_id
         string document_type
         string title
-        text notes
         timestamp created_at
         timestamp updated_at
     }
@@ -34,6 +33,7 @@ erDiagram
         int list_id FK
         int bookmark_id FK
         int position
+        text notes
         timestamp created_at
         timestamp updated_at
     }
